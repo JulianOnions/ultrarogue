@@ -1,0 +1,44 @@
+#
+# Makefile for installing and linking urogue
+#
+
+CC = cc -O
+RM =/bin/rm -f
+INSTALLDIR = /a/staff/peterv/ins
+UROGUE = /a/staff/peterv/urogue2
+LIB = /a/staff/peterv/urogue/ur.lib
+.o.c:		
+		$(CC) -O -c $*.o
+
+
+all:		urogue control namefinder lav
+
+control:	control.o tunable.o
+		$(CC) control.o tunable.o -o control
+
+urogue:		$(LIB) tunable.o
+		$(CC) -o urogue $(LIB) tunable.o -lcurses -ltermlib
+
+namefinder:	namefinder.o tunable.o
+		$(CC) namefinder.o tunable.o -o namefinder
+
+lav:		lav.o
+		$(CC) lav.o -o lav
+		
+install:	all
+		install -s -o games -m 4511 urogue $(UROGUE)
+		install -s -g kmem -m 2511 lav $(INSTALLDIR)
+
+uninstall:	uninit clean 
+		$(RM) $(UROGUE)
+
+uninit:		namefinder
+		$(RM) `namefinder`
+		
+init:		namefinder uninit
+		touch `namefinder`
+		chown games `namefinder`
+
+clean:		
+		$(RM) urogue control namefinder tunable.o
+

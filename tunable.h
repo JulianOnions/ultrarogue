@@ -1,0 +1,11 @@
+extern	int	UID;
+extern	char	PERMOK[];
+extern	char	PASSCTL[];
+extern	char	LOGIN[];
+extern	char	SCOREDIR[];
+extern	char	LOADAV_PROG[];
+extern	char	UTMP[];
+extern	int	MAXLOAD;
+extern	int	MAXUSERS;
+extern	int	HOLIDAY;
+extern	int	CHECKTIME;

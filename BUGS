@@ -1,0 +1,83 @@
+COMPILE ERORRS FOR ULTRA-ROGUE ON UCSCC - VAX 11/780 running 4.2bsd UNIX
+char version[] = "UltraRogue 1.02 mm/dd/yy 05/19/85";
+char *release = "1.02 Beta (Dr. C and Ivan were here 5/19/85)";
+
+Mon May  5 17:01:16 PDT 1986
+
+---------------------------
+cc -O -c maze.c
+"maze.c", line 119: warning: illegal pointer combination
+"maze.c", line 120: warning: illegal pointer combination
+	Changed
+		int *moffset(), *foffset();
+	To:
+		char *moffset(), *foffset();
+
+	In draw_maze() change:
+		reg int *ptr;
+	To:
+		reg char *ptr;
+	*moffset(i,j) was dying because malloc was being passed
+	a number which assumed it was a char array, but it was
+	being used as an int array.
+
+
+---------------------------
+cc -O -c monsdata.c
+"monsdata.c", line 824: warning: illegal combination of pointer and integer, op =
+"monsdata.c", line 824: warning: illegal combination of pointer and integer, op =
+
+Commented out the following inappropriate line (824):
+	{ISMEAN,ISUNIQUE, CANHOLD, CANPOISON,CANFRIGHTEN,ISMEAN, CANBBOLT},
+OOPS!   Doing this turns quartermasters into lucifers!
+Changed in rogue.h
+	#define NUMMONST	125
+to
+	#define NUMMONST	124
+
+---------------------------
+cc -O -c monsters.c
+"monsters.c", line 18: redeclaration of randmonster
+FIX:
+	Changed:
+		int randmonster()
+		return d;
+	to:
+		short randmonster()
+		return (short)d;
+	To be consistent with previous declaration in rogue.h
+
+---------------------------
+cc -O -c rip.c
+"rip.c", line 44: warning: illegal pointer combination
+FIX:
+	Changed:
+		register char **dp = *rip, *killer; 
+	to:
+		register char **dp = rip, *killer;
+
+(void) byebye() declaration in rogue.h was commented out.
+	Changed:
+		signal(SIGINT, byebye());
+	to:
+		signal(SIGINT, byebye);
+	How could high score have ever worked?
+	(Voids are a waste of time)
+
+---------------------------
+cc -O -c save.c
+"./rogue.h", F_OK redefined
+F_OK is defined in /usr/include/sys/file.h !!!
+Both are defined to 0, so it will work.
+
+---------------------------
+In main.c: line 411
+too_much(), I put in a return 0, so /usr/local/al is not executed.
+---------------------------
+
+Line 609 in misc.c
+Changed:
+    if (player.t_ctype = C_THIEF)
+To:
+    if (player.t_ctype == C_THIEF)
+
