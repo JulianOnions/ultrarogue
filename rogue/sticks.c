@@ -595,19 +595,18 @@ char *
 charge_str(obj)
 register struct object *obj;
 {
-    static char buf[20];
+  static char buf[20];
 
-    if (!(obj->o_flags & ISKNOW))
-	buf[0] = '\0';
-    else if (terse)
-	sprintf(buf, " [%d]", obj->o_charges);
-    else if (obj->o_charges == 1)
-	sprintf(buf, " [%d charge]", obj->o_charges);
-    else
-	sprintf(buf, " [%d charges]", obj->o_charges);
-    return buf;
+  if (!(obj->o_flags & ISKNOW))
+    buf[0] = '\0';
+  else if (terse)
+    snprintf(buf, sizeof(buf), " [%d]", obj->o_charges);
+  else if (obj->o_charges == 1)
+    snprintf(buf, sizeof(buf), " [%d charge]", obj->o_charges);
+  else
+    snprintf(buf, sizeof(buf), " [%d charges]", obj->o_charges);
+  return buf;
 }
-
 
 /*
  * shoot_bolt fires a bolt from the given starting point in the

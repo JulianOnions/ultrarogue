@@ -535,13 +535,13 @@ passwd()
 #ifdef USGV4
 	if (c == _tty.c_cc[VKILL])
 #else
-	if (c == _tty.sg_kill)
+	if (c == killchar())
 #endif
 	    sp = buf;
 #ifdef USGV4
 	else if (c == _tty.c_cc[VERASE] && sp > buf)
 #else
-	else if (c == _tty.sg_erase && sp > buf)
+	else if (c == erasechar() && sp > buf)
 #endif
 	    sp--;
 	else

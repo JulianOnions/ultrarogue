@@ -567,7 +567,7 @@ register coord *tc;
 	    else {
 		if (can_see) msg("The %s fell into a trap!", mname);
 		check_residue(th);
-		remove(&th->t_pos, mitem);
+		removeM(&th->t_pos, mitem);
 	    }
 	when BEARTRAP:
 	    if (is_stealth(th)) {
@@ -806,7 +806,7 @@ register coord *tc;
 	else {
 	    if (can_see) msg("The %s fell into a trap!", mname);
 	    check_residue(th);
-	    remove(&th->t_pos, mitem);
+	    removeM(&th->t_pos, mitem);
 	}
     when FIRETRAP: {
 	register struct room *rp = roomin(&hero);
@@ -832,7 +832,7 @@ register coord *tc;
 		if (can_see) 
 		    msg("The %s is burned to death by the flames.", mname);
 		check_residue(th);
-		remove(&th->t_pos, mitem);
+		removeM(&th->t_pos, mitem);
 	    }
 	    else if (on(*th, NOFIRE)) {
 		if (can_see)
@@ -846,7 +846,7 @@ register coord *tc;
 		    if (can_see) 
 			msg("The %s is burned to death by the flames.", mname);
 		    check_residue(th);
-		    remove(&th->t_pos, mitem);
+		    removeM(&th->t_pos, mitem);
 		}
 		else if (th->t_stats.s_intel < rnd(20)) {
 		    if (can_see) 
@@ -885,7 +885,7 @@ register coord *tc;
 	else {
 	    if (can_see) msg("The %s fell into a trap!", mname);
 	    check_residue(th);
-	    remove(&th->t_pos, mitem);
+	    removeM(&th->t_pos, mitem);
 	}
     when RUSTTRAP:
 	    if (is_player) {

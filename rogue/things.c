@@ -61,10 +61,10 @@ register bool drop;
 	    if (obj->o_count == 1)
 		sprintf(prbuf, "A%s %s", 
 				vowelstr(fd_data[obj->o_which]), 
-				fd_data[obj->o_which]);
+				fd_data[obj->o_which].mi_name);
 	    else
 		sprintf(prbuf, "%d %ss", obj->o_count,
-				fd_data[obj->o_which]);
+				fd_data[obj->o_which].mi_name);
 	when WEAPON:
 	    if (obj->o_count > 1)
 		sprintf(prbuf, "%d ", obj->o_count);

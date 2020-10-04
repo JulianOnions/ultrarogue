@@ -11,11 +11,11 @@
 #include <sys/file.h>
 #include <signal.h>
 #include "rogue.h"
+#include <errno.h>
 
 typedef struct stat STAT;
 
-extern char *sys_errlist[], version[];
-extern int errno;
+extern char version[];
 
 char *sbrk();
 
@@ -131,6 +131,7 @@ char **envp;
     extern char **environ;
     char buf[LINELEN];
     STAT sbuf2;
+  char *Def_term = "unknown";
 
     makesure();
 
@@ -196,11 +197,10 @@ char **envp;
     }
 
     environ = envp;
-    if (!My_term && isatty(2))
+    if (isatty(2))
     {
 	register char	*sp;
-
-	_tty_ch = 2;
+	//_tty_ch = 2;
 	gettmode();
 	if ((sp = getenv("TERM")) == NULL)
 	    sp = Def_term;

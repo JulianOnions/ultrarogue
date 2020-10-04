@@ -528,7 +528,7 @@ get_monst:
 	nip = next(ip);
 	if (mp->t_index == which_monst) {
 	    check_residue(mp);	/* Check for special features before removing */
-	    remove(&mp->t_pos, ip);
+	    removeM(&mp->t_pos, ip);
 	}
     }
 

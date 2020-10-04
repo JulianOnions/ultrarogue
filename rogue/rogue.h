@@ -3,7 +3,7 @@
  *
  */
 #include "../tunable.h"
-
+#define reg
 /*
  * Maximum number of different things
  */
@@ -137,10 +137,10 @@
 #define turn_off(thing, flag) \
     ((thing).t_flags[(flag >> FLAGSHIFT) & FLAGINDEX] &= ~flag)
 #ifndef	CTRL
-#define CTRL(ch) ('ch' & 037)
+#define CTRL(ch) (ch & 037)
 #endif
 #define ALLOC(x) malloc((unsigned int) x)
-#define FREE(x) cfree((char *) x)
+#define FREE(x) free((char *) x)
 #define	EQSTR(a, b, c)	(strncmp(a, b, c) == 0)
 #define GOLDCALC (rnd(50 + 10 * level) + 2)
 #define ISRING(h, r) (cur_ring[h] != NULL && cur_ring[h]->o_which == r)
@@ -158,7 +158,7 @@
 #define flushout() ioctl(_tty_ch,TCFLSH,0)
 #endif
 #define mi_wght mi_worth
-
+#define cfree(x) free(x)
 /*
  * Ways to die
  */
@@ -905,9 +905,9 @@ struct linked_list *new_thing(), *wake_monster(), *get_hurl(), *spec_item();
 struct object *wield_weap();
 
 #ifndef	unctrl
-char *malloc(), *getenv(), *unctrl(), *tr_name(), *new(), *sprintf();
+char *malloc(), *getenv(),  *tr_name(), *new();
 #else
-char *malloc(), *getenv(), *tr_name(), *new(), *sprintf();
+char *malloc(), *getenv(), *tr_name(), *new();
 #endif
 char *vowelstr(), *inv_name(), *strcpy(), *strcat(), *sbrk(), *brk();
 char *ctime(), *num(), *ring_num(), *blesscurse(), *typ_name();

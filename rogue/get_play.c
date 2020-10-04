@@ -17,7 +17,7 @@ geta_player()
 
 	register struct linked_list *item;
 	register struct object *obj;
-	register char char_file[LINELEN];	/* Where the file should be! */
+	char char_file[LINELEN];	/* Where the file should be! */
 	struct	stat	stbuf, st2buf;
 	int	fd;
 	int	arm,wpt,hpadd,dmadd;
@@ -179,7 +179,7 @@ puta_player(arm, wpt, hpadd, dmadd)
 int	arm, wpt, hpadd, dmadd;
 {
 
-	register char char_file[LINELEN];	/* Where the file should be! */
+	char char_file[LINELEN];	/* Where the file should be! */
 	register FILE	*fp;
 	register int	fd;
 	struct	stat	stbuf;
@@ -313,7 +313,7 @@ int	arm, wpt, hpadd, dmadd;
 	    mvwaddstr(hw,5,5,pbuf);
 	    mvwaddstr(hw,6,5,"However I'll let you play it anyway!");
 	    mvwaddstr(hw, LINES - 1, 0, spacemsg);
-	    draw(hw);
+	    draw(hw);https://www.facebook.com/julian.onions/media_set?set=a.171730313199&type=3
 	    wait_for(' ');
 	    return(TRUE);
 	}

@@ -1,7 +1,7 @@
 /*
  * Machine dependent (tunable) parametesafe.rs.
  */
-#define ROGUEPATH(FILE) "/xtel/users/jpo/games/lib/ur/FILE"
+#define ROGUEPATH(FILE) "lib/" #FILE
 
 /*
  * Wizard's identity.

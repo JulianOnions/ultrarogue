@@ -294,7 +294,6 @@ eat()
     if ((item = get_item("eat", FOOD)) == NULL)
 	return;
     obj = (struct object *) ldata(item);
-    del_pack(item);
     switch (obj->o_which) {
 	when FD_RATION:
 	    amount = HUNGERTIME + rnd(400) - 200;
@@ -339,6 +338,8 @@ eat()
     updpack(TRUE);
     if (obj == cur_weapon)
 	cur_weapon = NULL;
+    del_pack(item);
+
 }
 
 /*

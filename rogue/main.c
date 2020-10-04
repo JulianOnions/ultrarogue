@@ -13,6 +13,7 @@
 #include <sys/time.h>
 #include "mach_dep.h"
 #include "rogue.h"
+#include <time.h>
 
 static int num_checks;		/* times we've gone over in checkout() */
 static double avec[3];		/* load average vector */
@@ -85,7 +86,7 @@ char **envp;
      }
 
      /* put a copy of fruit in the right place */
-     strcpy(fd_data[1].mi_name, fruit);
+     fd_data[1].mi_name = strdup(fruit);
 
     /*
      * check for print-score option
@@ -352,12 +353,12 @@ tstp()
 setup()
 {
     int  checkout();
-    int  tstp();
+//    int  tstp();
 
     areuok();      /**void agin **/
     signal(SIGHUP, auto_save);
     signal(SIGINT, quit);
-    signal(SIGTSTP, tstp);
+//    signal(SIGTSTP, tstp);
 
     if (!author())
     {
@@ -386,7 +387,7 @@ playit()
 #ifndef USGV4
 	if((_tty.c_cflag & CBAUD) < B1200)
 #else
-	if(_tty.sg_ospeed < B1200)
+	if(baudrate() < 1200)
 #endif
     {
 	terse = TRUE;

@@ -977,7 +977,7 @@ struct object *cur_weapon;
 	    def->s_hpt -= max(0, damage);	/* Do the damage */
 	    did_hit = TRUE;
 	}
-	if ((cp = strchr(cp, '/')) == NULL)	/* strchr was index */
+	if (cp == NULL || (cp = strchr(cp, '/')) == NULL)	/* strchr was index */
 	    break;
 	cp++;
     }
@@ -1237,7 +1237,7 @@ register char *mname;
 /*
  * remove a monster from the screen
  */
-remove(mp, item)
+removeM(mp, item)
 register coord *mp;
 register struct linked_list *item;
 {
@@ -1315,11 +1315,7 @@ bool pr, points;
      */
     pitem = tp->t_pack;
 
-    /*
-     * Get rid of the monster.
-     */
-    remove(&tp->t_pos, item);
-    while (pitem != NULL)
+   while (pitem != NULL)
     {
 	register struct object *obj;
 
@@ -1333,7 +1329,11 @@ bool pr, points;
 
 	pitem = nexti;
     }
-}
+    /*
+     * Get rid of the monster.
+     */
+    removeM(&tp->t_pos, item);
+ }
 
 
 /* Returns a pointer to the weapon the monster is wielding corresponding to
@@ -1347,8 +1347,8 @@ struct thing *mp;
 {
     int look_for;
     register struct linked_list *pitem;
-
-    switch (weapon->o_which) {
+if (weapon == NULL) return NULL;
+     switch (weapon->o_which) {
 	case BOLT:	/* Find the crossbow */
 	    look_for = CROSSBOW;
 	    break;

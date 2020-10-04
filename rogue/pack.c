@@ -200,8 +200,8 @@
  	{
  	    op->o_count += obj->o_count;
  	    inpack--;			/* adjust for previous addition */
- 	    discard(item);
  	    freeletter(item);
+ 	    discard(item);
  	    item = ip;
  	    goto picked_up;
  	}
@@ -564,8 +564,8 @@
  	}
  	else {
  	    detach(pack,what);
- 	    discard(what);
  	    freeletter(what);
+ 	    discard(what);
  	    inpack--;
  	}
  	updpack(FALSE);

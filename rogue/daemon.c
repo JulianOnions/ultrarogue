@@ -17,7 +17,7 @@
 struct delayed_action {
 	int d_type;
 	int (*d_func)();
-	int d_arg;
+	int *d_arg;
 	int d_time;
 } d_list[MAXDAEMONS] = {
 	_X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_,
@@ -70,7 +70,7 @@ reg int (*func)();
  *	Start a daemon, takes a function.
  */
 daemon(func, arg, type)
-reg int arg, type, (*func)();
+reg int *arg, type, (*func)();
 {
 	reg struct delayed_action *dev;
 

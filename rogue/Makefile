@@ -18,14 +18,14 @@ CFILES= vers.c armor.c artifact.c chase.c command.c daemon.c daemons.c fight.c \
 
 SOURCES= $(CFILES) rogue.h mach_dep.h Makefile
 
-TERMLIB= -ltermlib
+TERMLIB= -lcrypt
 CRLIB= -lcurses
 
 # Installation variables.
 # install srogue here
 
-BIN=/a/staff/peterv/bin
-LIB=/a/staff/peterv/urogue/ur.lib
+BIN=bin
+LIB=ur.lib
 UMASK=4711
 CHMOD=chmod
 CP=cp
@@ -37,8 +37,8 @@ PROGRAM=tidy
 TEST=ntidy
 TUNABLE=../tunable.o
 
-LDFLAGS=
-CFLAGS= -O
+LDFLAGS= -g -fsanitize=address,leak,undefined
+CFLAGS= -O -g -fsanitize=address,leak,undefined
 
 $(PROGRAM):	$(HDRS) $(OBJS)	$(TUNABLE)
 		$(CC) $(LDFLAGS) $(OBJS) $(TUNABLE) $(CRLIB) $(TERMLIB) -o $@

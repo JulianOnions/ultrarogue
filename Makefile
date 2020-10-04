@@ -1,5 +1,5 @@
 
-INSD=/xtel/users/jpo/games
+INSD=./games
 LIB=$(INSD)/lib/ur
 DISTRIB = Makefile.install namefinder.o control.o $(LIB)
 SOURCES = Makefile Makefile.install namefinder.c control.c tunable.c tunable.h lav.c
@@ -20,7 +20,7 @@ install: $(DISTRIB)
 ##	@chmod 755 $(INSD)
 	@-rm -f $(INSD)/*
 	cp Makefile.install $(INSD)/Makefile
-	cp BUGS README lav.c tunable.c $(LIB) control.o namefinder.o $(INSD)
+	cp BUGS README lav.c tunable.c control.o namefinder.o $(INSD)
 	@chmod 644 $(INSD)/*
 	
 control: control.o $(TUNABLE)

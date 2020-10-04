@@ -13,6 +13,7 @@
 #include <pwd.h>
 #include "mach_dep.h"
 #include "rogue.h"
+#include <time.h>
 
 static char *rip[15] = {		
 "                       __________",
@@ -142,8 +143,8 @@ short monst;
 	int sc_flags;
 	int sc_level;
 	int sc_uid;
-	short sc_artifacts;
-	short sc_monster;
+	int sc_artifacts;
+	int sc_monster;
     } top_ten[10];
     register struct sc_ent *scp;
     register int i;
@@ -171,6 +172,7 @@ short monst;
 	    packend = "at your untimely demise";
 	mvaddstr(LINES - 1, 0, retstr);
 	refresh();
+	nocrmode();
 	gets(prbuf);
 	showpack(packend);
     }
@@ -536,9 +538,8 @@ char *howso;
 
 void byebye()
 {
-    extern bool _endwin;
 
-    if (!_endwin) {
+    if (!isendwin()) {
         clear();
 	endwin();
     }

@@ -230,7 +230,7 @@
 #ifndef USGV4
  	else if (c == _tty.c_cc[VERASE]) /* process erase character */
 #else
- 	else if (c == _tty.sg_erase) /* process erase character */
+ 	else if (c == erasechar()) /* process erase character */
 #endif
  	{
  	    if (sp > buf)
@@ -246,7 +246,7 @@
 #ifndef USGV4
  	else if (c == _tty.c_cc[VKILL])  /* process kill character */
 #else
- 	else if (c == _tty.sg_kill)  /* process kill character */
+ 	else if (c == killchar())  /* process kill character */
 #endif
  	{
  	    sp = buf;
